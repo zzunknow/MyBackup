@@ -15,7 +15,7 @@
 =============================
 启动时报
 iptables: No config file.
-service iptables save
+#service iptables save
 =============================
 初始配置
 开始的安全策略：默认拒绝所有、只允许所需

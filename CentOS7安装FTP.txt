@@ -25,6 +25,9 @@
 	//提示这个是正常的，你已经创建好这个用户了，warning的原因是因为你已经存在/var/www/t 这个目录了，系统没有为你复制相应的profile等配置文件。如果需要配置，可以手动创建，可以参考其他用户的profile
 	#passwd [用户名]
 	//设置密码
+	=============能登陆无法修改文件==============
+	chmod 777 [目录] //为目录添加777权限
+	=============================================
 4、修改/etc/vsftpd/vsftpd.conf文件
 	anonymous_enable=NO 		//禁止匿名访问
 	chroot_local_user=YES 		//锁定目录
@@ -42,3 +45,6 @@
 [root@localhost vsftpd]#getsebool -a | grep ftp
 [root@localhost vsftpd]#setsebool -P ftpd_full_access on
 =========================iptables开启ftp端口=======================================
+iptables -A INPUT -p tcp -m multiport --dport 20,21  -m state --state NEW -j ACCEPT  --开启20,21端口
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT            --开启21主动端口
+iptables -A INPUT -p tcp --dport 30000:31000 -j ACCEPT            --开启被动端口
