@@ -1,0 +1,5 @@
+window.open(URL,name,specs,replace);打开一个新的浏览器窗口或查找一个已命名的窗口
+
+window.opener.location.reload(); //刷新父窗口中的网页
+
+window.close();//关闭当前窗窗口

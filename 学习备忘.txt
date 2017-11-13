@@ -1,0 +1,44 @@
+set java_home=JDK路径
+set tomcat_home=tomcat路径
+
+insert into 表名(列名) values(值);
+delete from 表名 where 条件;
+update 表名 set 列名=值 where 条件;
+select 列名 from 表名 where 条件;
+
+创建外键（主表作为子表外键）
+ALTER TABLE 子表名 ADD CONSTRAINT 外键约束名 FOREIGN KEY (子表外键列) REFERENCES 主表名;
+
+创建序列
+CREATE SEQUENCE 序列名
+INCREMENT BY 1  -- 每次递增1
+START WITH 1 -- 从1开始
+MAXVALUE 999999999 --最大999999999
+NOCYCLE; 
+使用序列名
+序列名.nextval
+
+request 请求
+response 应答
+session 会话
+application 全局
+out 输出流
+page 本页
+pageContext 本面属性
+config 配置
+exception 异常
+
+Connection 连接数据库
+PreparedStatement 预编译执行SQL代码
+
+interface
+implements
+extends
+
+event.keyCode //html5获取键盘按键Unicode值
+//在网页按键弹出对应键盘Unicode值
+$(document).keydown(function(){
+	alert(event.keyCode);
+});
+
+encrypt加密

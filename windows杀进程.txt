@@ -1,0 +1,2 @@
+taskkill /pid 进程PID /f
+taskkill /im 进程名 /f

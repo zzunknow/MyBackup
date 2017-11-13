@@ -1,0 +1,58 @@
+给scott用户解锁
+SQL> alter user scott account unlock;
+User altered
+一.创建用户
+	SQL> create user XXXX //用户名
+  	2  identified by yyyy;//口令
+	User created
+ 
+授予权限语法：grant 权限 角色 to 用户名	
+
+二.授予连接数据库和访问资源的权限
+	SQL> grant connect,resource to XXXX;
+	Grant succeeded
+
+三.授予创建表空间的权限
+	SQL> grant create tablespace to XXXX;
+	Grant succeeded
+ 
+四.给用户设置删除表空间权限
+	SQL> grant drop tablespace to XXXX;
+	Grant succeeded
+
+五.授予创建表的权限
+	SQL> grant create table to XXXX;
+	Grant succeeded
+ 
+六.收回用户创建表空间的权限
+	SQL> revoke create tablespace from XXXX;
+	Revoke succeeded
+
+七.授予A用户访问B用户test表的权限
+	SQL> grant select on B.test to A;
+	Grant succeeded
+	访问方法：在A用户里面SQL窗口里输入 select * from B.test;
+
+八.修改用户口令
+	SQL> alter user XXXX
+  	2  identified by ZZZZ;新口令
+	User altered
+
+九.删除用户
+	SQL> drop user XXX;
+	删除包含模糊对象
+	SQL> drop user XXX cascade;
+
+十.创建表空间
+	在用户的SQL窗口里面创建，例如：
+	create tablespace XXX（表空间名） datafile'C:\Users\Jidu\Desktop\yyy(实例名).dbf' size 20m;
+   删除表空间
+	在用户的SQL窗口里面删除，例如：
+	drop tablespace XXX;
+
+十一.用户表导出导入
+	$ exp 原用户/口令@数据库名 file=导出文件的路径 tables=(表名);
+	$ imp 现用户/口令@数据库名 file=导出文件的路径 fromuser=原用户 touser=现用户 tables=(表名);
+十二.给用户授权创建视图权限
+	SQL> grant create any view to XXXX;
+	Grant succeeded

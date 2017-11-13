@@ -1,0 +1,44 @@
+1、安装vsftpd
+	# yum  install -y  vsftpd //安装
+	# rpm -q vsftpd //查看是否安装成功
+2、启动服务
+	# systemctl status vsftpd.service
+	(如果是激活状态的话会有active绿色的标记)
+	#激活vsftpd服务
+	# systemctl start vsftpd.service
+	#设置vsftpd服务开机自启
+	#systemctl enable vsftpd.service
+	==============CentOS 6.8==============
+	#service vsftpd start
+	手动启动ftp服务
+	或者#/etc/init.d/vsftpd start
+	#chkconfig vsftpd on	设为开机启动
+	#service vsftpd stop	停止服务
+	#service vsftpd restart	重启服务
+	#service vsftpd status	查看状态
+	======================================
+3、添加用户
+	#useradd [用户名] -d [根目录] -s /sbin/nologin
+	// -s 指定shell脚本为/sbin/nologin，表示不允许shell登录 
+	useradd: warning: the home directory already exists.
+	Not copying any file from skel directory into it.
+	//提示这个是正常的，你已经创建好这个用户了，warning的原因是因为你已经存在/var/www/t 这个目录了，系统没有为你复制相应的profile等配置文件。如果需要配置，可以手动创建，可以参考其他用户的profile
+	#passwd [用户名]
+	//设置密码
+4、修改/etc/vsftpd/vsftpd.conf文件
+	anonymous_enable=NO 		//禁止匿名访问
+	chroot_local_user=YES 		//锁定目录
+	allow_writeable_chroot=YES	//解决锁定目录后无法登陆问题（6.8不需要）
+	
+
+--完成以上就可以访问FTP了，更多配置需要修改vsftpd.conf文件
+
+#如果系统启用了防火墙和SELinux，那么还要做以下配置(默认情况下centos7是使用firewall和selinux的，不在使用iptables)
+ 
+#防火墙添加FTP服务：
+[root@localhost vsftpd]#firewall-cmd --permanent --zone=public --add-service=ftp
+[root@localhost vsftpd]#firewall-cmd --reload
+#设置SELinux：
+[root@localhost vsftpd]#getsebool -a | grep ftp
+[root@localhost vsftpd]#setsebool -P ftpd_full_access on
+=========================iptables开启ftp端口=======================================

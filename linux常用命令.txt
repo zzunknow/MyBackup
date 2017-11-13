@@ -1,0 +1,22 @@
+ls 查看文件
+vi 文件编辑 :w 保存 :q退出 :set nu显示行号 :12跳到12行
+rm -rf 删除文件夹
+cp -R /home/upload/* /home/www (复制upload下的所有文件到www目录下)
+tar -zxvf 解压tar.gz文件
+jar -xvf 解压war文件
+unzip -o 文件名 -d 目录（解压到指定目录-o表示不询问用户，执行后覆盖原文件，-d 指定目录）
+mkdir 创建目录
+mv 移动目录
+ln(LN小写) 建立链接（加参数-s 建立软件链接）
+ps -ef|grep *** 查看服务是否启动
+tail查看文件内容（-f 不停去读最新内容，ctrl+c来终止）
+cat 查看文件全部内容
+head -5 (看文件前5行内容)
+sed -n '5,10p'(看文件5到10行内容)
+
+创建一个Git仓库
+git init --bare *.git
+chown -R git:git *.git
+
+安装rpm包
+rpm -ivh 包名 --nodeps --force(--nodeps不查找依赖关系，--force强制)

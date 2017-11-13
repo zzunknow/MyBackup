@@ -1,0 +1,12 @@
+PRIMARY KEY 设置为主键
+UNIQUE KEY (name)添加唯一约束
+auto_increment 设置递增
+not null 设置非空
+sysdate() 系统当前时间
+
+CREATE TABLE 表名(
+	字段名1 字段类型 PRIMARY KEY auto_increment,
+	字段名2 字段类型（长度）not null,
+	字段名3 字段类型,
+	FOREIGN KEY(字段名3) references 作为外键的表名(作为外键的字段名)
+);
