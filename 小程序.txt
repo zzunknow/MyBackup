@@ -1,4 +1,0 @@
-Ð¡³ÌÐò
-cq-zouzheng@cmbc.com.cn
-String appid = "wxa72c80684116a4a8";
-String secret = "17a4b3d68d89b0c469fcd43cbb979dee";
