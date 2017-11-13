@@ -2,6 +2,8 @@
 	# rpm -qa | grep mysql
 	如果有需要删除
 	# yum -y remove [mysql-libs-5.1* //这是文件名]
+	如果有依赖，强删
+	# rpm -e [文件名] --nodeps
 2、下载MySQL软件包
 	#cd /home
 	进入存放文件的目录
