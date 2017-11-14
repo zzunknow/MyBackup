@@ -8,8 +8,8 @@
 	#cd /home
 	进入存放文件的目录
 	# wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-server-5.6.21-1.rhel5.x86_64.rpm
-	# wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-devel-5.6.21-1.rhel5.x86_64.rpm
-	# wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-client-5.6.21-1.rhel5.x86_64.rpm //普通使用只装前两项即可
+	# wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-client-5.6.21-1.rhel5.x86_64.rpm 
+	# wget http://dev.mysql.com/Downloads/MySQL-5.6/MySQL-devel-5.6.21-1.rhel5.x86_64.rpm	//普通使用只装前两项即可
 	下载三个包
 3、安装
 	# rpm -ivh MySQL-server-5.6.21-1.rhel5.x86_64.rpm	//数据库服务器
@@ -19,6 +19,7 @@
 	# cp /usr/share/mysql/my-default.cnf /etc/my.cnf
 5、初始化MySQL及修改MySQL默认的root密码
 	# /usr/bin/mysql_install_db		//初始化
+	# service mysql start			//启动mysql
 	# ps -ef | grep mysql 			//查看服务
 	# netstat -anpt | grep 3306		//查看端口
 	# more /root/.mysql_secret		//查看初始密码
@@ -30,5 +31,12 @@
 7、打开防火墙端口
 	# iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
 8、远程访问需要授权
-	grant all privileges on *.* to root@'%' identified by '[密码]' with grant option;
+	grant all privileges on *.* to root@'%' identified by '[密码]' with grant option; 
+	//root@'%'为所有人都可访问，root@'192.168.1.%'为192.168.1网段可访问
 	flush privileges;	//刷新mysql系统权限相关表
+	
+=======================设置字符集================
+mysql版本5.5以上在my.cnf[mysqld]下添加
+character-set-server=utf8
+collation-server=utf8_general_ci
+=================================================
