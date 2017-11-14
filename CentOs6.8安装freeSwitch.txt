@@ -1,0 +1,58 @@
+1、安装依赖软件包
+	# yum install -y autoconf automake libtool gcc-c++ ncurses-devel make zlib-devel libjpeg-devel
+	# yum install -y openssl-devel e2fsprogs-devel curl-devel pcre-devel speex-devel sqlite-devel
+2、安装git
+	# yum install git
+3、下载代码
+	# git clone -b v1.4 https://freeswitch.org/stash/scm/fs/freeswitch.git
+4、安装
+	在freeSwitch目录下执行
+	# ./bootstrap.sh	//初始化一些编译环境
+	# ./configure		//配置编译环境
+	# make install		//执行编译安装
+5、安装声音文件
+	# make sounds-install
+	# make moh-install
+6、建立软连接，方便使用
+	# ln -sf /usr/local/freeswitch/bin/freeswitch /usr/bin/
+	# ln -sf /usr/local/freeswitch/bin/fs_cli /usr/bin/
+7、启动服务
+
+=================================防火墙端口===============================
+默认入站禁止，出站允许情况下
+-A INPUT -p udp -m udp --dport 1719 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 1720 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 3478 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 3479 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 5002 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 5003 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 5060 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 5060 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 5070 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 5070 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 5080 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 5080 -j ACCEPT 
+-A INPUT -p tcp -m tcp --dport 8021 -j ACCEPT 
+-A INPUT -p udp -m udp --dport 16384:32768 -j ACCEPT 
+===========================================================================
+	
+======================================安装时的一些问题解决办法============================================
+如果有问题，系统会自动列出来。
+make && make install && make hd-sounds-install && make hd-moh-install && make samples
+我碰到的问题：
+问题1：configure: error: Library requirements (sqlite3 >= 3.6.20) not met
+办法：
+yum install sqlite-devel.x86_64
+问题2：configure: error: Library requirements (libpcre >= 7.8) not met
+办法：
+yum install pcre*
+问题3：configure: error: Library requirements (speex >= 1.2rc1 speexdsp >= 1.2rc1) not met
+办法：yum install speex*
+问题4：configure: error: You need to either install libldns-dev or disable mod_enum in modules.conf
+办法：
+按提示没有找到libldns-dev 包，所以我选择disable mod_enum，做法如下：
+[root@localhost freeswitch]#vi modules.conf
+#applications/mod_enum
+问题5：提示libedit-dev找不到。办法：
+ yum install libedit*
+==========================================================================================================
