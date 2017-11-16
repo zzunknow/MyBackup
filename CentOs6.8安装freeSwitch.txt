@@ -1,6 +1,31 @@
 1、安装依赖软件包
 	# yum install -y autoconf automake libtool gcc-c++ ncurses-devel make zlib-devel libjpeg-devel
 	# yum install -y openssl-devel e2fsprogs-devel curl-devel pcre-devel speex-devel sqlite-devel
+	=============================离线安装顺序====================================
+	# rpm -ivh autoconf-2.63-5.1.el6.noarch.rpm
+	# rpm -ivh automake-1.11.1-4.el6.noarch.rpm
+	# rpm -ivh libtool-2.2.6-15.5.el6.x86_64.rpm
+	# rpm -ivh libstdc++-devel-4.4.7-18.el6.x86_64.rpm 
+	# rpm -ivh gcc-c++-4.4.7-18.el6.x86_64.rpm
+	# rpm -ivh ncurses-devel-5.7-4.20090207.el6.x86_64.rpm
+	# rpm -ivh zlib-devel-1.2.3-29.el6.x86_64.rpm
+	# rpm -ivh libjpeg-turbo*
+	# rpm -ivh keyutils-libs-devel-1.4-5.el6.x86_64.rpm  
+	# rpm -ivh libcom_err-devel-1.41.12-23.el6.x86_64.rpm 
+	# rpm -ivh libkadm5-1.10.3-65.el6.x86_64.rpm 
+	# rpm -ivh libsepol-devel-2.0.41-4.el6.x86_64.rpm 
+	# rpm -ivh libselinux-devel-2.0.94-7.el6.x86_64.rpm
+	# rpm -ivh krb5-devel-1.10.3-65.el6.x86_64.rpm
+	# rpm -ivh openssl-devel-1.0.1e-57.el6.x86_64.rpm
+	# rpm -ivh e2fsprogs-devel-1.41.12-23.el6.x86_64.rpm
+	# rpm -ivh pcre-devel-7.8-7.el6.x86_64.rpm
+	# rpm -ivh speex-1.2-0.12.rc1.1.el6.x86_64.rpm
+	# rpm -ivh speex-devel-1.2-0.12.rc1.1.el6.x86_64.rpm
+	# rpm -ivh sqlite-devel-3.6.20-1.el6_7.2.x86_64.rpm
+	# rpm -ivh libidn-devel-1.18-2.el6.x86_64.rpm
+	# rpm -ivh libcurl-devel-7.19.7-53.el6_9.x86_64.rpm
+	# rpm -ivh libedit-devel-2.11-4.20080712cvs.1.el6.x86_64.rpm
+	===========================================================================
 2、安装git
 	# yum install git
 3、下载代码
