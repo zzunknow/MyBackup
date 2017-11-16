@@ -11,6 +11,7 @@ mkdir 创建目录
 mv 移动目录/重命名
 cp -R /home/upload/* /home/www (复制upload下的所有文件到www目录下，-r 表示拷贝子目录)
 ln(LN小写) 建立链接（加参数-s 建立软件链接）
+whereis [模糊文件名]
 find 路径 参数 查找内容 //# find /etc -name httpd.conf 在/etc目录下文件httpd.conf
 						(1)find / -amin -10 　　# 查找在系统中最后10分钟访问的文件(access time)
 　　　　				(2)find / -atime -2　　 # 查找在系统中最后48小时访问的文件
