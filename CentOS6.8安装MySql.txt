@@ -33,7 +33,7 @@
 8、远程访问需要授权
 	grant all privileges on *.* to root@'%' identified by '[密码]' with grant option; 
 	//root@'%'为所有人都可访问，root@'192.168.1.%'为192.168.1网段可访问
-	flush privileges;	//刷新mysql系统权限相关表
+	flush privileges;	//刷新mysql系统权限相关表,使设置生效
 	
 =======================设置字符集================
 mysql版本5.5以上在my.cnf[mysqld]下添加
