@@ -1,0 +1,20 @@
+
+shutdown	//停止服务
+console loglevel 7	//设置日志输出级别7为degub
+originate sofia/gateway/gw1/123456 &echo //测试网关gw1是网关名，123456是外线被叫号
+
+sofia status profile internal	//列出profile状态
+sofia status profile internal reg //查看注册用户
+sofia status profile internal reg 1000	//过滤某些符合条件的用户
+sofia status profile internal user 1000	//列出某个特定用户
+sofia status gateway [gw1] //查看网关状态，[gw1]查看指定网关
+
+sofia profile internal start	//启动
+sofia profile internal stop		//停止
+sofia profile internal restart	//重启
+sofia profile internal rescan	//不重启重读sofia配置（不是所有配置参数都能生效）
+sofia profile external killgw gw1	//删除一个网关
+sofia profile external register gw1	//指定某个网关立即向外注册
+sofia profile internal siptrace on	//	开启该profile的sip跟踪功能抓sip包
+sofia profile internal flush_inbound_reg 1001@192.168.1.7	//清理注册用户，也可以通过call-id来清理
+
