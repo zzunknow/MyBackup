@@ -1,0 +1,30 @@
+======================================================虚拟目录或主目录==========================================================
+为了在访问web服务的时候，不需要输入项目名，直接"/"就可以访问的话，需要设置虚拟目录或在ROOT下直接放项目
+1、采用虚拟目录的方式
+　　在Host中添加  
+	<Context crossContext="true" docBase="E:/tomcatApp/JeasyCMS" path="/" reloadable="true"></Context>
+　　或
+　　在 conf/Catalina/localhost 中创建ROOT.xml配置
+
+　　具体配置解释：
+　　1）crossContext:多用户共享session的配置。如果想在应用内调用 ServletContext.getContext()来返回在该虚拟主机上运行
+					的其他 web application 的 request dispatcher,设为 true。在安全性很重要的环境中设为 false，
+					使得 getContext()总是返回 null。缺省值为 false。
+　　2）docBase:项目的虚拟目录，非webapps下
+　　3）path:指定访问该 Web 应用的 URL 入口。
+	4）reloadable:如果这个属性设为 true，tomcat 服务器在运行状态下会监视在WEB-INF/classes 和 WEB-INF/lib 目录下 
+					class 文件的改动，如果监测到有 class 文件被更新的，服务器会自动重新加载 Web 应用。
+　　注意以下三点：
+　　1）如果path为空或/的话，则会覆盖/webapps/ROOT的项目，导致ROOT下的东西无法访问
+　　2）如果Context的docBase配置在非Webapps目录下的话，有可能出现Cookie和session互窜的问题，比如用户1登录看到用户2的登录信息
+　　3）如果配置了Context，并且docBase中的目录在Webapps下（非ROOT），则会导致项目加载两次
+　　　　例如：<Context docBase="/wetalk/wss/apache-tomcat-7.0.62/webapps/AAA" path="" debug="0" reloadable="true"/>
+　　　　因为项目启动时，会自动加载Host中配置的Webapps目录下的项目，且会再次加载Context配置的虚拟目录
+
+2、直接将项目放在webapps/ROOT目录下
+	这种方式不用配置context就可以使用，比较方便
+================================================================================================================================
+
+
+
+
