@@ -1,4 +1,4 @@
-
+freeswitch -nc	//启动到后台
 shutdown	//停止服务
 console loglevel 7	//设置日志输出级别7为degub
 originate sofia/gateway/gw1/123456 &echo //测试网关gw1是网关名，123456是外线被叫号
@@ -14,12 +14,66 @@ sofia profile internal stop		//停止
 sofia profile internal restart	//重启
 sofia profile internal rescan	//不重启重读sofia配置（不是所有配置参数都能生效）
 sofia profile external killgw gw1	//删除一个网关
-sofia profile external register gw1	//指定某个网关立即向外注册
+sofia profile external register gw1	//指定某个网关立即向外注册(修改了网关需要rescan使其生效)
 sofia profile internal siptrace on	//	开启该profile的sip跟踪功能抓sip包
 sofia profile internal flush_inbound_reg 1001@192.168.1.7	//清理注册用户，也可以通过call-id来清理
+
+=================================启动多个实例=================================
+1.复制一份新环境
+	mkdir /usr/local/freeswitch2
+	cd /usr/local/freeswitch2
+	cp -R /usr/local/freeswitch/conf .
+	mkdir log
+	mkdir db
+	ln -sf ../freeswitch/sounds .
+2.修改端口
+3.启动
+	cd /usr/local/freeswitch2/
+	/usr/local/freeswitch/bin/freeswitch -conf conf -log log -db db
+==============================================================================
 
 =============================修改端口==============================
 conf/vars.xml	//freeswitch监听端口
 conf/autoload_configs/event_socket.conf.xml	//客户端连接端口
 ===================================================================
  
+ 
+======================================配置fs_cli访问========================================================
+1.首先修改/usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml
+<configuration name="event_socket.conf" description="Socket Client">
+<settings>
+<param name="nat-map" value="false"/>
+<!--0.0.0.0表示运行其它主机进行访问,127.0.0.1表示只允许本机进行访问-->
+<param name="listen-ip" value="0.0.0.0"/>
+<param name="listen-port" value="8021"/>
+<param name="password" value="123456"/>
+<!--<param name="apply-inbound-acl" value="loopback.auto"/>-->
+<!--my_acl 就表示防火墙规则, -->
+<param name="apply-inbound-acl" value="my_acl"/>
+<!--<param name="stop-on-bind-error" value="true"/>-->
+</settings>
+</configuration>
+
+2.然后修改/usr/local/freeswitch/conf/autoload_configs/acl.conf.xml
+添加如下部分:
+<list name="my_acl" default="deny">
+<node type="allow" cidr="192.168.17.3/16"/>
+<node type="allow" domain="$${domain}"/>
+<!-- this allow fs_cli to connect else fs_cli wont work -->
+<node type="allow" cidr="127.0.0.1/32" />
+</list>
+表示该my_acl规则禁止所有,除了允许的192.168.xx.xx和127.0.0.1两个IP地址
+
+3.在192.168.17.3服务器上新建文件:/root/.fs_cli_conf
+添加如下内容:
+[fs200]
+host => 192.168.4.200
+port => 8021
+password => 123456
+debug => 7
+
+其中fs200表示链接名称
+将192.168.4.200上的freeswitch重启之后,在192.168.17.3上输入:
+fs_cli fs200
+就可以远程访问192.168.4.200上的freeswitch
+==============================================================================================================
