@@ -5,3 +5,13 @@
 =======================设置自启动=========================
 把启动程序的命令添加到/etc/rc.d/rc.local文件中
 ==========================================================
+
+======================================更换yum源(阿里云)===================================
+1.备份原镜像文件，以免出错后可以恢复
+# mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+2.下载新的CentOS-Base.repo 到/etc/yum.repos.d/
+# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+3.运行yum makecache生成缓存
+# yum clean all  
+# yum makecache 
+==========================================================================================
