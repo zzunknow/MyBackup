@@ -1,0 +1,21 @@
+1.安装ODBC
+# yum install unixODBC unixODBC-devel libtool-ltdl libtool-ltdl-devel
+2.安装驱动
+# yum install mysql-connector-odbc	//注意：如果安装了mysql要装对应版本的驱动，不然会冲突
+									（mysql5.6-->mysql-connector-odbc-5.3.9-1.el6.x86_64）
+3.为MySQL配置ODBC
+# vi /etc/odbcinst.ini	//正常情况不用配置，安装驱动时会自动添加配置，可跳过此步
+4.配置数据源
+# vi /root/.odbc.ini
+===========.odbc.ini模板==============
+[yccc]
+Driver   = /usr/lib64/libmyodbc5a.so
+Setup     = /usr/lib64/libodbcmyS.so
+SERVER = 192.168.1.158
+USER = web
+PASSWOrd = 12345678
+PORT = 3306
+DATABASE = hy_pbx_test
+charset = UTF8
+OPTION=3
+======================================
