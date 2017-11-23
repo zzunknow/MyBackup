@@ -55,5 +55,5 @@
        <password>root</password>
       </dataSource>
     </connectionSource>
- </appender> -->
+ </appender>
 </configuration>
