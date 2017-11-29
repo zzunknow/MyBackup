@@ -1,5 +1,5 @@
 1、查看是否有系统自带的mysql的rpm包
-	# rpm -qa | grep mysql
+	# rpm -qa | grep -i mysql	//-i的作用是不区分大小写
 	如果有需要删除
 	# yum -y remove [mysql-libs-5.1* //这是文件名]
 	如果有依赖，强删
