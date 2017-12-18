@@ -48,8 +48,10 @@ yum remove  卸载
 yum install --downloadonly --downloaddir=/tmp //只下载不安装,/tmp为下载路径
 安装rpm包
 rpm -ivh 包名 --nodeps --force(--nodeps不查找依赖关系，--force强制)
+rpm -ivh --test 包名 //用来检查依赖关系，并不是真正的安装
 rpm -qa 包名 查看已经安装的包
 rpm -qR 包名 查看已安装的包所依赖的包及文件
+rpm -qpR 包名 //依赖关系
 rpm -ql 包名 或 rpm rpmquery -ql 包名 查看已安装的包都安装在何处
 rpm -e 卸载包（包名可以包含版本号等信息，但是不可以有后缀.rpm）
 tar -zxvf 解压tar.gz文件
